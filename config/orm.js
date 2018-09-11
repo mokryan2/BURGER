@@ -29,17 +29,52 @@ function objToSql(ob) {
 };
 
 const orm = {
-    selectAll: (burgers, cb) => {
-        var queryString = "SELECT * FROM " + burgers + ";";
-        connection.query(queryString, (err, result) => { 
-            if(err){
+    selectAll: (tableInput, cb) => {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, (err, result) => {
+            if (err) {
                 throw err;
             }
             cb(result);
         });
     },
-    
-}
+    inserOne: (tableInput, cols, vals, cb) => {
+        var queryString = "INSERT INTO " + tableInput;
+
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
+
+        console.log(queryString);
+
+        connection.query(queryString, vals, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
+    updateOne: (table, objColVals, condition, cb) => {
+        var queryString = "UPDATE " + table;
+
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE ";
+        queryString += condition;
+
+        console.log(queryString);
+        connection.query(queryString, function (err, result) {
+            if (err) {
+                throw err;
+            }
+
+            cb(result);
+        });
+    }
+};
 
 
 

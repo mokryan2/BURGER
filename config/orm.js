@@ -1,4 +1,4 @@
-const connection = require("../config/connection.js");
+const connection = require("../config/connection");
 
 // Loop function that will convert "?" => string
 function printQuestionMarks(num) {
@@ -38,7 +38,7 @@ const orm = {
             cb(result);
         });
     },
-    inserOne: (tableInput, cols, vals, cb) => {
+    insertOne: (tableInput, cols, vals, cb) => {
         var queryString = "INSERT INTO " + tableInput;
 
         queryString += " (";
@@ -57,8 +57,8 @@ const orm = {
             cb(result);
         });
     },
-    updateOne: (table, objColVals, condition, cb) => {
-        var queryString = "UPDATE " + table;
+    updateOne: (tableInput, objColVals, condition, cb) => {
+        var queryString = "UPDATE " + tableInput;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);
@@ -66,7 +66,7 @@ const orm = {
         queryString += condition;
 
         console.log(queryString);
-        connection.query(queryString, function (err, result) {
+        connection.query(queryString, (err, result) => {
             if (err) {
                 throw err;
             }

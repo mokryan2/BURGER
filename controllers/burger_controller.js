@@ -1,6 +1,6 @@
 //dependencies
 const express = require('express');
-const burger = require('../models/burger.js');
+const burger = require('../models/burger');
 const router = express.Router();
 
 //Displays DB
@@ -19,15 +19,15 @@ router.post("/api/burgers", (req, res) => {
     burger.createOne([
         "burger_name", "devoured"
     ], [
-        req.body.burger_name, req.body.devoured
-    ],(res) => {
+            req.body.burger_name, req.body.devoured
+        ], (res) => {
             res.json({ id: res.insertId });
         });
 });
 
 //Update burger state
-router.put("/api/burgers/:id", function (req, res) {
-    var condition = ` id = ${req.params.id}`;
+router.put("/api/burgers/:id", (req, res) => {
+    var condition = "id = " + req.params.id;
 
     console.log("condition: " + condition);
 
@@ -36,7 +36,7 @@ router.put("/api/burgers/:id", function (req, res) {
             devoured: req.body.devoured
         },
         condition,
-        function (result) {
+        (result) => {
             if (result.changedRows === 0) {
                 return res.status(404).end();
             }

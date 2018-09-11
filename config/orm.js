@@ -57,8 +57,8 @@ const orm = {
             cb(result);
         });
     },
-    updateOne: (table, objColVals, condition, cb) => {
-        var queryString = "UPDATE " + table;
+    updateOne: (burgers, objColVals, condition, cb) => {
+        var queryString = "UPDATE " + burgers;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);

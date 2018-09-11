@@ -1,7 +1,12 @@
 li {
-    padding: 5px;
-    margin: 5px;
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left:23%;
+    margin-right: 27%;
     background: #faebd7;
+    width:50%;
+    border: solid 5px red;
   }
   
   .label {
@@ -16,4 +21,47 @@ li {
   
   .form-group {
     margin-bottom: 5px;
+    margin-left:25%;
+    font-weight: bold;
+    font-size:18px;
+    background-color:white;
+    border: solid black 5px;
+    width: 50%;
+    padding: 1%
+  }
+
+  body{
+    text-align: center;
+    background-image:url("../img/download.jpg")
+  }
+
+  button:hover{
+    cursor: pointer;
+    font-weight: bold
+  }
+
+  #ca:hover{
+    border: lightblue 5px solid;
+  }
+
+  h1{
+    background: #faebd7;
+    width:70%;
+    margin-left:15%;
+    margin-right:15%;
+    padding: 5px;
+    border: solid yellow 5px;
+  }
+
+  h2{
+    background: #faebd7;
+    width:50%;
+    margin-left:25%;
+    margin-right:25%;
+    padding: 5px;
+    border: solid lime 5px;
+  }
+  h3{
+    font-size: 36px;
+    margin:2%;
   }

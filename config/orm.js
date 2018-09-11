@@ -1,4 +1,4 @@
-const connection = require("../config/connection");
+const connection = require("../config/connection.js");
 
 // Loop function that will convert "?" => string
 function printQuestionMarks(num) {
@@ -38,8 +38,8 @@ const orm = {
             cb(result);
         });
     },
-    insertOne: (tableInput, cols, vals, cb) => {
-        var queryString = "INSERT INTO " + tableInput;
+    insertOne: (table, cols, vals, cb) => {
+        var queryString = "INSERT INTO " + table;
 
         queryString += " (";
         queryString += cols.toString();
@@ -57,8 +57,8 @@ const orm = {
             cb(result);
         });
     },
-    updateOne: (tableInput, objColVals, condition, cb) => {
-        var queryString = "UPDATE " + tableInput;
+    updateOne: (table, objColVals, condition, cb) => {
+        var queryString = "UPDATE " + table;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);
@@ -66,6 +66,19 @@ const orm = {
         queryString += condition;
 
         console.log(queryString);
+        connection.query(queryString, (err, result) => {
+            if (err) {
+                throw err;
+            }
+
+            cb(result);
+        });
+    },
+    delete: (table, condition, cb) => {
+        var queryString = "DELETE FROM " + table;
+        queryString += " WHERE ";
+        queryString += condition;
+
         connection.query(queryString, (err, result) => {
             if (err) {
                 throw err;

@@ -1,11 +1,11 @@
 //Dependencies
-const express = require('express');
-const burger = require('../models/burger.js');
+const express = require("express");
+const burger = require("../models/burger.js");
 const router = express.Router();
 
 //Displays DB
-router.get("/", (req, res) => {
-    burger.selectAll((data) => {
+router.get("/", function (req, res) {
+    burger.selectAll(function (data) {
         var hbsObject = {
             burgers: data
         };
@@ -15,25 +15,25 @@ router.get("/", (req, res) => {
 });
 
 //Post a new burger
-router.post("/api/burgers", (req, res) => {
+router.post("/api/burgers", function(req, res) {
     burger.insertOne([
         "burger_name", "devoured"
     ], [
-            req.body.burger_name, req.body.devoured
-        ], (result) => {
+            req.body.name, req.body.devoured
+        ], function (result) {
             res.json({ id: result.insertId });
         });
 });
 
 //Update burger state
-router.put("/api/burgers/:id", (req, res) => {
+router.put("/api/burgers/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
     console.log("condition", condition);
 
     burger.updateOne({
         devoured: req.body.devoured
-    }, condition, (result) => {
+    }, condition, function (result) {
         if (result.changedRows == 0) {
             return res.status(404).end();
         } else {
@@ -43,9 +43,9 @@ router.put("/api/burgers/:id", (req, res) => {
     );
 });
 
-router.delete("/api/burgers/:id", (req, res) => {
+router.delete("/api/burgers/:id", function (req, res) {
     var condition = "id = " + req.params.id;
-    burger.delete(condition, (result) => {
+    burger.delete(condition, function (result) {
         if (result.affectedRows == 0) {
             return res.status(404).end();
         } else {

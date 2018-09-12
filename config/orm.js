@@ -8,16 +8,15 @@ function printQuestionMarks(num) {
         arr.push("?");
     }
     return arr.toString();
-};
+}
 
 // Converts key/value pair to SQL 
 function objToSql(ob) {
     var arr = [];
 
-    // Pushes into arr
+
     for (var key in ob) {
         var value = ob[key];
-        // skip hidden properties
         if (Object.hasOwnProperty.call(ob, key)) {
             if (typeof value === "string" && value.indexOf(" ") >= 0) {
                 value = "'" + value + "'";
@@ -26,19 +25,19 @@ function objToSql(ob) {
         }
     }
     return arr.toString();
-};
+}
 
-const orm = {
-    selectAll: (tableInput, cb) => {
-        var queryString = "SELECT * FROM " + tableInput + ";";
-        connection.query(queryString, (err, result) => {
+var orm = {
+    selectAll: function (burgers, cb) {
+        var queryString = "SELECT * FROM " + burgers + ";";
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
             cb(result);
         });
     },
-    insertOne: (table, cols, vals, cb) => {
+    insertOne: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
 
         queryString += " (";
@@ -50,15 +49,15 @@ const orm = {
 
         console.log(queryString);
 
-        connection.query(queryString, vals, (err, result) => {
+        connection.query(queryString, vals, function (err, result) {
             if (err) {
                 throw err;
             }
             cb(result);
         });
     },
-    updateOne: (burgers, objColVals, condition, cb) => {
-        var queryString = "UPDATE " + burgers;
+    updateOne: function (table, objColVals, condition, cb) {
+        var queryString = "UPDATE " + table;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);
@@ -66,7 +65,7 @@ const orm = {
         queryString += condition;
 
         console.log(queryString);
-        connection.query(queryString, (err, result) => {
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -74,12 +73,12 @@ const orm = {
             cb(result);
         });
     },
-    delete: (table, condition, cb) => {
+    delete: function (table, condition, cb) {
         var queryString = "DELETE FROM " + table;
         queryString += " WHERE ";
         queryString += condition;
 
-        connection.query(queryString, (err, result) => {
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }

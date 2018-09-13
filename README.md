@@ -6,3 +6,5 @@ If you don't see one you like, you can add one! When you make the burger you can
 
 If you changed your mind about the burger, you can throw it in the trash(but who doesn't enjoy a tasty burger...?)!
 
+Wanna try the app? Go here: https://ancient-forest-54433.herokuapp.com/
+
